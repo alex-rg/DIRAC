@@ -1163,6 +1163,11 @@ class StorageElementItem:
                 log.debug(f"Local protocol not appropriate for remote use: {protocolSection}.")
                 continue
 
+            if localSE and pluginParameters.get("RemoteOnly", False) in (True, "True", "true"):
+                # If the protocol section is marked "RemoteOnly" and the SE is local, skip it
+                log.debug(f"Remote protocol not appropriate for local use: {protocolSection}.")
+                continue
+
             if pluginParameters["Protocol"] not in potentialProtocols:
                 log.debug(f"Plugin {protocolSection} not allowed for {methodName}.")
                 continue
