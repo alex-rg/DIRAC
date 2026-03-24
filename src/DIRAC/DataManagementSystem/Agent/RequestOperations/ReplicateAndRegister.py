@@ -84,6 +84,9 @@ def filterReplicas(opFile, logger=None, dataManager=None, opSources=None, active
     if opSources:
         replicas = {x: y for (x, y) in replicas.items() if x in opSources}
 
+    if opSources == ["PIC-DC-RAW"]:
+        replicas = {"PIC-DC-RAW": True}
+
     noReplicas = False
     if not replicas:
         allReplicas = dataManager.getReplicas(opFile.LFN, getUrl=False)
